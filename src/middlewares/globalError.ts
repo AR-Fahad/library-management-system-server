@@ -9,8 +9,8 @@ const globalError = (
 ) => {
   sendResponse(res, {
     success: false,
-    status: err?.status || 500,
-    message: err?.name || err?.message || "Something went wrong",
+    status: err?.status || 400,
+    message: err?.message || err?.name || "Something went wrong",
   });
 };
 

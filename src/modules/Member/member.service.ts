@@ -16,21 +16,29 @@ const getAllMembers = async () => {
 };
 
 const getMember = async (memberId: string) => {
-  const result = await prisma.member.findUniqueOrThrow({
+  const result = await prisma.member.findUnique({
     where: {
       memberId,
     },
   });
+
+  if (!result) {
+    throw new Error("Member not found");
+  }
 
   return result;
 };
 
 const updateMember = async (memberId: string, data: Partial<TMember>) => {
-  await prisma.member.findUniqueOrThrow({
+  const member = await prisma.member.findUnique({
     where: {
       memberId,
     },
   });
+
+  if (!member) {
+    throw new Error("Member not found");
+  }
 
   const result = await prisma.member.update({
     where: {
@@ -43,11 +51,15 @@ const updateMember = async (memberId: string, data: Partial<TMember>) => {
 };
 
 const deleteMember = async (memberId: string) => {
-  await prisma.member.findUniqueOrThrow({
+  const member = await prisma.member.findUnique({
     where: {
       memberId,
     },
   });
+
+  if (!member) {
+    throw new Error("Member not found");
+  }
 
   const result = await prisma.member.delete({
     where: {
