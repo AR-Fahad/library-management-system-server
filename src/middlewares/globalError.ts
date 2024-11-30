@@ -7,11 +7,19 @@ const globalError = (
   res: Response,
   next: NextFunction
 ) => {
-  sendResponse(res, {
-    success: false,
-    status: err?.status || 400,
-    message: err?.message || err?.name || "Something went wrong",
-  });
+  if (!err?.name) {
+    sendResponse(res, {
+      success: false,
+      status: err?.status || 500,
+      message: err?.message || "Something went wrong",
+    });
+  } else {
+    sendResponse(res, {
+      success: false,
+      status: err?.status || 400,
+      message: err?.name || "Something went wrong",
+    });
+  }
 };
 
 export default globalError;
