@@ -7,7 +7,7 @@ const globalError = (
   res: Response,
   next: NextFunction
 ) => {
-  if (!err?.name) {
+  if (err?.name === "Error") {
     sendResponse(res, {
       success: false,
       status: err?.status || 500,
