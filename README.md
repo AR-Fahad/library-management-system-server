@@ -4,7 +4,7 @@ Library Management System that allows library staff and members to manage books,
 
 - Live URL: https://library-management-system-server-six.vercel.app
 
-## **Technologies **
+## **Technologies**
 
 - **Prisma ORM**
 - **Node.js**
@@ -113,7 +113,7 @@ npx prisma migrate dev --name <migration-name>
 
 ## Key Features & Functionality:
 
-#### **1. Book CRUD Operations**
+### **1. Book CRUD Operations**
 
 - **Create Book**  
   Creates a new book record in the library’s database.
@@ -250,7 +250,7 @@ npx prisma migrate dev --name <migration-name>
 
 ---
 
-#### **2. Member CRUD Operations**
+### **2. Member CRUD Operations**
 
 - **Create Member**  
   Adds a new member to the library.
@@ -440,7 +440,7 @@ When an error occurs in the system, the following structure use in the response:
 
 ### **Explanation**:
 
-- **success**: Always set to `false` in case of an error to indicate failure.
+- **success**: Always show `false` in case of an error to indicate failure.
 - **status**: The HTTP status code that corresponds to the error (e.g., 404 for not found, 400 for bad request, 500 for server errors).
 - **message**: A short description of the error, providing a general overview of what went wrong (e.g., "Invalid book ID", "No available copies").
 
