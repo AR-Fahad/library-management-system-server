@@ -1,3 +1,4 @@
+import AppError from "../../classes/AppError";
 import prisma from "../../connection/prisma";
 import { TBook } from "./book.interface";
 
@@ -23,7 +24,7 @@ const getBook = async (bookId: string) => {
   });
 
   if (!result) {
-    throw new Error("Book not found");
+    throw new AppError(404, "Book not found");
   }
 
   return result;
@@ -37,7 +38,7 @@ const updateBook = async (bookId: string, data: Partial<TBook>) => {
   });
 
   if (!book) {
-    throw new Error("Book not found");
+    throw new AppError(404, "Book not found");
   }
 
   const result = await prisma.book.update({
@@ -58,7 +59,7 @@ const deleteBook = async (bookId: string) => {
   });
 
   if (!book) {
-    throw new Error("Book not found");
+    throw new AppError(404, "Book not found");
   }
 
   const result = await prisma.book.delete({

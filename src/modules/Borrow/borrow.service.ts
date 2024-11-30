@@ -1,3 +1,4 @@
+import AppError from "../../classes/AppError";
 import prisma from "../../connection/prisma";
 import getDayDifference from "./borrow.utils";
 
@@ -9,7 +10,7 @@ const createBorrow = async (data: { memberId: string; bookId: string }) => {
   });
 
   if (!member) {
-    throw new Error("Member not found");
+    throw new AppError(404, "Member not found");
   }
 
   const book = await prisma.book.findUnique({
@@ -19,11 +20,11 @@ const createBorrow = async (data: { memberId: string; bookId: string }) => {
   });
 
   if (!book) {
-    throw new Error("Book not found");
+    throw new AppError(404, "Book not found");
   }
 
   if (book?.availableCopies <= 0) {
-    throw new Error("No available copies");
+    throw new AppError(404, "No available copies");
   }
 
   const result = await prisma.$transaction(async (tx) => {

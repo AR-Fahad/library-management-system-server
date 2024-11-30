@@ -1,3 +1,4 @@
+import AppError from "../../classes/AppError";
 import prisma from "../../connection/prisma";
 import { TMember } from "./member.interface";
 
@@ -23,7 +24,7 @@ const getMember = async (memberId: string) => {
   });
 
   if (!result) {
-    throw new Error("Member not found");
+    throw new AppError(404, "Member not found");
   }
 
   return result;
@@ -37,7 +38,7 @@ const updateMember = async (memberId: string, data: Partial<TMember>) => {
   });
 
   if (!member) {
-    throw new Error("Member not found");
+    throw new AppError(404, "Member not found");
   }
 
   const result = await prisma.member.update({
@@ -58,7 +59,7 @@ const deleteMember = async (memberId: string) => {
   });
 
   if (!member) {
-    throw new Error("Member not found");
+    throw new AppError(404, "Member not found");
   }
 
   const result = await prisma.member.delete({

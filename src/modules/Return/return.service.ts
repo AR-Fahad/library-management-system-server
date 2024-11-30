@@ -1,3 +1,4 @@
+import AppError from "../../classes/AppError";
 import prisma from "../../connection/prisma";
 
 const returnBook = async (borrowId: string) => {
@@ -11,11 +12,11 @@ const returnBook = async (borrowId: string) => {
   });
 
   if (!borrow) {
-    throw new Error("Borrow record not found");
+    throw new AppError(404, "Borrow record not found");
   }
 
   if (borrow?.returnDate) {
-    throw new Error("Book already returned");
+    throw new AppError(409, "Book already returned");
   }
 
   await prisma.$transaction(async (tx) => {
